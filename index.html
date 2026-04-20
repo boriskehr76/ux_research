@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ghosted — Both sides of a broken hiring process</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+CiAgPHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiBmaWxsPSIjMGUwZTBlIi8+CiAgPHBhdGggZD0iCiAgICBNMTYgNQogICAgQzEwLjUgNSA3IDkgNyAxNAogICAgTDcgMjYKICAgIEwxMCAyMyBMMTMgMjYgTDE2IDIzIEwxOSAyNiBMMjIgMjMgTDI1IDI2CiAgICBMMjUgMTQKICAgIEMyNSA5IDIxLjUgNSAxNiA1CiAgICBaCiAgIiBmaWxsPSIjZDRhODRiIi8+CiAgPGNpcmNsZSBjeD0iMTIuNSIgY3k9IjE1IiByPSIyIiBmaWxsPSIjMGUwZTBlIi8+CiAgPGNpcmNsZSBjeD0iMTkuNSIgY3k9IjE1IiByPSIyIiBmaWxsPSIjMGUwZTBlIi8+Cjwvc3ZnPg==">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@300;400;500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -86,15 +87,20 @@
     border-bottom: 1px solid var(--border);
     transition: background-color 0.3s ease, border-color 0.3s ease;
     padding: 0 clamp(1.5rem, 5vw, 5rem);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
     height: 56px;
     position: sticky;
     top: 0;
     background: var(--bg);
     backdrop-filter: blur(12px);
     z-index: 100;
+  }
+  .header-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
 
   .logo {
@@ -111,6 +117,7 @@
     display: flex;
     gap: 2rem;
     list-style: none;
+    margin-left: 3rem;
   }
 
   .nav-links a {
@@ -347,7 +354,7 @@
 
   /* SECTION */
   section {
-    margin-bottom: 5rem;
+    margin-bottom: 6rem;
     scroll-margin-top: 80px;
   }
 
@@ -371,22 +378,24 @@
     font-size: 1.6rem;
     font-weight: 700;
     color: var(--text);
-    margin-bottom: 1rem;
-    line-height: 1.3;
+    margin-top: 0.25rem;
+    margin-bottom: 1.25rem;
+    line-height: 1.25;
   }
 
   .section-intro {
     font-family: var(--sans);
     font-size: 14px;
     color: var(--text2);
-    margin-bottom: 2rem;
-    line-height: 1.6;
+    margin-bottom: 2.5rem;
+    line-height: 1.75;
     max-width: 600px;
   }
 
   p {
-    margin-bottom: 1.2rem;
+    margin-bottom: 1.5rem;
     color: var(--text);
+    max-width: 68ch;
   }
 
   /* STAT GRID */
@@ -859,24 +868,133 @@
     transform: translateY(0);
   }
 
-  /* RESPONSIVE */
+  /* ── HEADER LAYOUT ───────────────────────────────────────── */
+  .header-divider {
+    width: 1px;
+    height: 18px;
+    background: var(--border2);
+    display: inline-block;
+    margin: 0 1.5rem;
+    flex-shrink: 0;
+  }
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-left: auto;
+    flex-shrink: 0;
+  }
+
+  /* ── HAMBURGER MENU ──────────────────────────────────────── */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 4px;
+    transition: background 0.15s ease;
+  }
+  .hamburger:hover { background: var(--bg3); }
+  .hamburger:active { background: var(--border); }
+  .hamburger span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--text);
+    border-radius: 2px;
+    transition: all 0.25s ease;
+    transform-origin: center;
+  }
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  .mobile-nav {
+    display: none;
+    position: fixed;
+    top: 56px;
+    left: 0;
+    right: 0;
+    background: var(--bg2);
+    border-bottom: 1px solid var(--border);
+    padding: 0.5rem 0;
+    z-index: 99;
+    flex-direction: column;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+  }
+  .mobile-nav.open { display: flex; }
+  .mobile-nav a {
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text);
+    text-decoration: none;
+    padding: 0.9rem 1.5rem;
+    border-bottom: 1px solid var(--border);
+    opacity: 0.8;
+    transition: background 0.15s ease, opacity 0.15s ease, padding-left 0.15s ease;
+  }
+  .mobile-nav a:last-child { border-bottom: none; }
+  .mobile-nav a:hover { background: var(--bg3); opacity: 1; padding-left: 1.85rem; }
+  .mobile-nav a:active { background: var(--border); opacity: 1; }
+
+  /* ── RESPONSIVE ─────────────────────────────────────────── */
   @media (max-width: 900px) {
     .hero { grid-template-columns: 1fr; gap: 2rem; }
     .main { grid-template-columns: 1fr; }
     .sidebar { display: none; }
     .bar-row { grid-template-columns: 140px 1fr 50px; }
+    .tldr-grid { grid-template-columns: 1fr !important; gap: 2rem !important; }
+    .about-grid { grid-template-columns: 1fr !important; gap: 2rem !important; }
   }
 
   @media (max-width: 700px) {
     .nav-links { display: none; }
+    .hamburger { display: flex; }
+    .header-divider { display: none; }
     .hero-right { display: none; }
     .bar-row { grid-template-columns: 100px 1fr 40px; }
     .bar-label { font-size: 11px; }
+    .hero {
+      padding: 3rem 1.25rem;
+    }
+    section {
+      padding-left: 1.25rem !important;
+      padding-right: 1.25rem !important;
+    }
+    .findings {
+      grid-template-columns: 1fr !important;
+    }
+    .stat-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+    .quote-card {
+      padding: 1.25rem;
+    }
+    .filter-bar {
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    h2 {
+      font-size: 1.4rem;
+    }
+    footer {
+      flex-direction: column;
+      gap: 0.75rem;
+      text-align: center;
+      padding: 1.5rem 1.25rem;
+    }
+    .footer-left { margin: 0; }
   }
 
-  /* TLDR panel responsive */
-  @media (max-width: 800px) {
-    .tldr-grid { grid-template-columns: 1fr !important; gap: 2rem !important; }
+  @media (max-width: 420px) {
+    .stat-grid { grid-template-columns: 1fr; }
+    .stat-value { font-size: 2rem; }
   }
 
   /* ── THEME TOGGLE SWITCH ─────────────────────────────────── */
@@ -885,7 +1003,6 @@
     border: none;
     cursor: pointer;
     padding: 0;
-    margin-left: auto;
     flex-shrink: 0;
     display: flex;
     align-items: center;
@@ -951,29 +1068,55 @@
 <body>
 
 <header>
-  <a href="#" class="logo">Ghosted</a>
-  <ul class="nav-links">
-    <li><a href="#findings">Findings</a></li>
-    <li><a href="#candidates">Candidates</a></li>
-    <li><a href="#companies">Companies</a></li>
-    <li><a href="#signals">Signals</a></li>
-    <li><a href="#future">What they want</a></li>
-    <li><a href="#sources" class="sidebar-link" style="margin-left: -12px;">Sources</a></li>
-  </ul>
-  <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light/dark mode" title="Toggle light/dark mode">
-    <span class="toggle-icon" id="theme-icon-sun">&#9788;</span>
-    <span class="toggle-track">
-      <span class="toggle-knob"></span>
-    </span>
-    <span class="toggle-icon" id="theme-icon-moon">&#9790;</span>
-  </button>
+  <div class="header-inner">
+    <a href="#" class="logo">Ghosted</a>
+    <span class="header-divider"></span>
+    <ul class="nav-links" style="margin-left: 0;">
+      <li><a href="#findings">Findings</a></li>
+      <li><a href="#candidates">Candidates</a></li>
+      <li><a href="#companies">Companies</a></li>
+      <li><a href="#signals">Signals</a></li>
+      <li><a href="#future">What they want</a></li>
+      <li><a href="#sources" class="sidebar-link">Sources</a></li>
+    </ul>
+    <div class="header-right">
+      <button class="hamburger" id="hamburger" aria-label="Open navigation">
+        <span></span><span></span><span></span>
+      </button>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light/dark mode" title="Toggle light/dark mode">
+        <span class="toggle-icon" id="theme-icon-sun">&#9788;</span>
+        <span class="toggle-track">
+          <span class="toggle-knob"></span>
+        </span>
+        <span class="toggle-icon" id="theme-icon-moon">&#9790;</span>
+      </button>
+    </div>
+  </div>
 </header>
+
+<!-- MOBILE NAV -->
+<nav class="mobile-nav" id="mobile-nav">
+  <a href="#findings" class="mobile-nav-link">Findings</a>
+  <a href="#candidates" class="mobile-nav-link">Candidates</a>
+  <a href="#companies" class="mobile-nav-link">Companies</a>
+  <a href="#signals" class="mobile-nav-link">Signals</a>
+  <a href="#future" class="mobile-nav-link">What they want</a>
+  <a href="#sources" class="mobile-nav-link">Sources</a>
+</nav>
 
 <!-- HERO -->
 <div class="hero">
   <div class="hero-left">
     <div class="hero-label">Research Report — April 2026</div>
-    <h1 style="font-size: clamp(3rem, 7vw, 5.5rem); margin-bottom: 0.5rem;"><em>Ghosted</em></h1>
+    <h1 style="font-size: clamp(3rem, 7vw, 5.5rem); margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.2em; line-height: 1; color: var(--accent);">
+      <svg viewBox="0 0 40 52" style="height: 0.9em; width: auto; flex-shrink: 0; margin-bottom: 0.05em;" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20 3 C10 3 4 10 4 19 L4 46 L9 41 L14 46 L20 41 L26 46 L31 41 L36 46 L36 19 C36 10 30 3 20 3 Z"
+          stroke="currentColor" stroke-width="2" stroke-linejoin="round" fill="none"/>
+        <circle cx="14" cy="21" r="2.5" fill="currentColor"/>
+        <circle cx="26" cy="21" r="2.5" fill="currentColor"/>
+      </svg>
+      <em>Ghosted</em>
+    </h1>
     <p style="font-family: var(--sans); font-size: 0.9rem; color: var(--text2); letter-spacing: 0.08em; margin-bottom: 1.5rem; text-transform: uppercase;">Both sides of a broken hiring process</p>
     <p style="font-family: var(--sans); font-size: 15px; color: var(--text2); line-height: 1.65; margin-bottom: 1.5rem;">
       I interviewed 21 designers, recruiters, and hiring managers across Sweden. This is what I found, and why the system keeps failing the very people it is supposed to serve.
@@ -1022,81 +1165,13 @@
   </div>
 </div>
 
-<!-- TLDR + CHAPTER LINKS -->
+<!-- TLDR -->
 <div style="background: var(--bg2); border-bottom: 1px solid var(--border); padding: 3rem clamp(1.5rem, 5vw, 5rem);">
-  <div style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start;">
-
-    <!-- LEFT: TLDR -->
-    <div>
-      <div style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem;">TL;DR</div>
-      <p style="font-family: var(--serif); font-size: 1.05rem; line-height: 1.8; color: var(--text); margin-bottom: 1rem;">The Swedish UX hiring market is failing both sides at the same time. The infrastructure between them was built for a different era. Nobody has rebuilt it.</p>
-      <p style="font-family: var(--serif); font-size: 1.05rem; line-height: 1.8; color: var(--text); margin-bottom: 1rem;">AI has accelerated the breakdown without fixing the underlying problem. Candidates send hundreds of applications into the void. Recruiters drown in noise they cannot convert into signal. Both sides end up performing for a system that serves neither.</p>
-      <p style="font-family: var(--serif); font-size: 1.05rem; line-height: 1.8; color: var(--text2); font-style: italic;">What people actually want is not complicated. This research shows what it is, and why the system keeps getting in the way.</p>
-    </div>
-
-    <!-- RIGHT: CHAPTER LINKS -->
-    <div>
-      <div style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text3); margin-bottom: 1.25rem;">↓ Jump to chapter</div>
-      <div style="display: flex; flex-direction: column; gap: 0px;">
-        <a href="#findings" style="display: flex; align-items: baseline; gap: 0.75rem; padding: 0.55rem 0; border-bottom: 1px solid var(--border); text-decoration: none; transition: color 0.15s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color=''">
-          <span style="font-family: var(--mono); font-size: 10px; color: var(--accent); flex-shrink: 0; min-width: 24px;">01</span>
-          <span style="font-family: var(--sans); font-size: 13px; color: var(--text2);">Seven things that are broken</span>
-        </a>
-        <a href="#candidates" style="display: flex; align-items: baseline; gap: 0.75rem; padding: 0.55rem 0; border-bottom: 1px solid var(--border); text-decoration: none; transition: color 0.15s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color=''">
-          <span style="font-family: var(--mono); font-size: 10px; color: var(--accent); flex-shrink: 0; min-width: 24px;">02</span>
-          <span style="font-family: var(--sans); font-size: 13px; color: var(--text2);">The candidate side</span>
-        </a>
-        <a href="#companies" style="display: flex; align-items: baseline; gap: 0.75rem; padding: 0.55rem 0; border-bottom: 1px solid var(--border); text-decoration: none; transition: color 0.15s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color=''">
-          <span style="font-family: var(--mono); font-size: 10px; color: var(--accent); flex-shrink: 0; min-width: 24px;">03</span>
-          <span style="font-family: var(--sans); font-size: 13px; color: var(--text2);">The company side</span>
-        </a>
-        <a href="#ai" style="display: flex; align-items: baseline; gap: 0.75rem; padding: 0.55rem 0; border-bottom: 1px solid var(--border); text-decoration: none; transition: color 0.15s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color=''">
-          <span style="font-family: var(--mono); font-size: 10px; color: var(--accent); flex-shrink: 0; min-width: 24px;">04</span>
-          <span style="font-family: var(--sans); font-size: 13px; color: var(--text2);">AI in the hiring process</span>
-        </a>
-        <a href="#signals" style="display: flex; align-items: baseline; gap: 0.75rem; padding: 0.55rem 0; border-bottom: 1px solid var(--border); text-decoration: none; transition: color 0.15s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color=''">
-          <span style="font-family: var(--mono); font-size: 10px; color: var(--accent); flex-shrink: 0; min-width: 24px;">05</span>
-          <span style="font-family: var(--sans); font-size: 13px; color: var(--text2);">The signals no tool captures</span>
-        </a>
-        <a href="#transparency" style="display: flex; align-items: baseline; gap: 0.75rem; padding: 0.55rem 0; border-bottom: 1px solid var(--border); text-decoration: none; transition: color 0.15s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color=''">
-          <span style="font-family: var(--mono); font-size: 10px; color: var(--accent); flex-shrink: 0; min-width: 24px;">06</span>
-          <span style="font-family: var(--sans); font-size: 13px; color: var(--text2);">The noise problem &amp; transparency</span>
-        </a>
-        <a href="#quotes" style="display: flex; align-items: baseline; gap: 0.75rem; padding: 0.55rem 0; border-bottom: 1px solid var(--border); text-decoration: none; transition: color 0.15s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color=''">
-          <span style="font-family: var(--mono); font-size: 10px; color: var(--accent); flex-shrink: 0; min-width: 24px;">07</span>
-          <span style="font-family: var(--sans); font-size: 13px; color: var(--text2);">Voice of the market</span>
-        </a>
-        <a href="#external" style="display: flex; align-items: baseline; gap: 0.75rem; padding: 0.55rem 0; border-bottom: 1px solid var(--border); text-decoration: none; transition: color 0.15s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color=''">
-          <span style="font-family: var(--mono); font-size: 10px; color: var(--accent); flex-shrink: 0; min-width: 24px;">08</span>
-          <span style="font-family: var(--sans); font-size: 13px; color: var(--text2);">What the numbers confirm</span>
-        </a>
-        <a href="#market" style="display: flex; align-items: baseline; gap: 0.75rem; padding: 0.55rem 0; border-bottom: 1px solid var(--border); text-decoration: none; transition: color 0.15s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color=''">
-          <span style="font-family: var(--mono); font-size: 10px; color: var(--accent); flex-shrink: 0; min-width: 24px;">09</span>
-          <span style="font-family: var(--sans); font-size: 13px; color: var(--text2);">The market in numbers</span>
-        </a>
-        <a href="#tests" style="display: flex; align-items: baseline; gap: 0.75rem; padding: 0.55rem 0; border-bottom: 1px solid var(--border); text-decoration: none; transition: color 0.15s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color=''">
-          <span style="font-family: var(--mono); font-size: 10px; color: var(--accent); flex-shrink: 0; min-width: 24px;">10</span>
-          <span style="font-family: var(--sans); font-size: 13px; color: var(--text2);">The test nobody trusts</span>
-        </a>
-        <a href="#independent" style="display: flex; align-items: baseline; gap: 0.75rem; padding: 0.55rem 0; border-bottom: 1px solid var(--border); text-decoration: none; transition: color 0.15s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color=''">
-          <span style="font-family: var(--mono); font-size: 10px; color: var(--accent); flex-shrink: 0; min-width: 24px;">11</span>
-          <span style="font-family: var(--sans); font-size: 13px; color: var(--text2);">An independent view</span>
-        </a>
-        <a href="#future" style="display: flex; align-items: baseline; gap: 0.75rem; padding: 0.55rem 0; text-decoration: none; transition: color 0.15s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color=''">
-          <span style="font-family: var(--mono); font-size: 10px; color: var(--accent); flex-shrink: 0; min-width: 24px;">12</span>
-          <span style="font-family: var(--sans); font-size: 13px; color: var(--text2);">What people actually want</span>
-        </a>
-        <a href="#sources" style="display: flex; align-items: baseline; gap: 0.75rem; padding: 0.55rem 0; text-decoration: none; transition: color 0.15s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color=''">
-          <span style="font-family: var(--mono); font-size: 10px; color: var(--accent); flex-shrink: 0; min-width: 24px;">—</span>
-          <span style="font-family: var(--sans); font-size: 13px; color: var(--text2);">About this research</span>
-        </a>
-        <a href="#sources" style="display: flex; align-items: baseline; gap: 0.75rem; padding: 0.55rem 0; text-decoration: none; transition: color 0.15s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color=''">
-          <span style="font-family: var(--mono); font-size: 10px; color: var(--accent); flex-shrink: 0; min-width: 24px;">—</span>
-          <span style="font-family: var(--sans); font-size: 13px; color: var(--text2);">Sources and further reading</span>
-        </a>
-      </div>
-    </div>
-
+  <div style="max-width: 640px; margin: 0 auto;">
+    <div style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.25rem;">TL;DR</div>
+    <p style="font-family: var(--serif); font-size: 1.05rem; line-height: 1.8; color: var(--text); margin-bottom: 1.5rem;">The Swedish UX hiring market is failing both sides at the same time. The infrastructure between them was built for a different era. Nobody has rebuilt it.</p>
+    <p style="font-family: var(--serif); font-size: 1.05rem; line-height: 1.8; color: var(--text); margin-bottom: 1.5rem;">AI has accelerated the breakdown without fixing the underlying problem. Candidates send hundreds of applications into the void. Recruiters drown in noise they cannot convert into signal. Both sides end up performing for a system that serves neither.</p>
+    <p style="font-family: var(--serif); font-size: 1.05rem; line-height: 1.8; color: var(--text2); font-style: italic; margin-bottom: 0;">What people actually want is not complicated. This research shows what it is, and why the system keeps getting in the way.</p>
   </div>
 </div>
 
@@ -1555,12 +1630,6 @@
       <h2 class="anim">Voice of the market</h2>
       <p class="section-intro anim">Direct quotes from the 21 interviews. All participants anonymised by role and context.</p>
 
-      <div class="filter-bar">
-        <button class="filter-btn active" onclick="filterQuotes('all', event)">All voices</button>
-        <button class="filter-btn" onclick="filterQuotes('candidate', event)">Candidates only</button>
-        <button class="filter-btn" onclick="filterQuotes('recruiter', event)">Recruiters only</button>
-      </div>
-
       <div class="quote-grid anim">
         <div class="quote-card visible" data-type="candidate">
           <div class="quote-text">"You perform to fit the expected candidate profile. It's performance theater."</div>
@@ -1921,7 +1990,7 @@
       </div>
       <h2 class="anim">About this research</h2>
 
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-top: 0;" class="anim">
+      <div class="about-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-top: 0;" class="anim">
 
         <div>
           <div style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem;">Who I am</div>
@@ -2041,9 +2110,20 @@
 </div><!-- /main -->
 
 <footer>
-  <div class="footer-left">SWEDISH UX HIRING REPORT · APRIL 2026 · STOCKHOLM</div>
-  <p class="footer-note">All interview participants are anonymised. No names, employers, or identifying details appear in this report. Data from third-party sources is cited inline. This is independent research, not sponsored by any platform or employer. More in the About section.</p>
-  <p class="footer-note" style="margin-top: 0.5rem; font-size: 0.7rem; opacity: 0.6;">Version 1.1 · Last updated 19 April 2026</p>
+  <div style="max-width: 1200px; margin: 0 auto; width: 100%; display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem;">
+    <div>
+      <div class="footer-left">SWEDISH UX HIRING REPORT · APRIL 2026 · STOCKHOLM</div>
+      <p class="footer-note" style="margin-top: 0.5rem;">All interview participants are anonymised. No names, employers, or identifying details appear in this report. Data from third-party sources is cited inline. This is independent research, not sponsored by any platform or employer. More in the About section.</p>
+      <p class="footer-note" style="margin-top: 0.5rem; font-size: 0.7rem; opacity: 0.6;">Version 1.1 · Last updated 19 April 2026</p>
+    </div>
+    <div style="text-align: right; flex-shrink: 0;">
+      <div style="font-family: var(--mono); font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.6rem;">Get in touch</div>
+      <div style="font-family: var(--sans); font-size: 12px; color: var(--text2); line-height: 2;">
+        <a href="https://www.linkedin.com/in/boriskehr/" target="_blank" rel="noopener" style="color: var(--text2); text-decoration: none; display: block; transition: color 0.2s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text2)'">Boris Kehr — LinkedIn</a>
+        <a href="mailto:boris@designloop.se" style="color: var(--text2); text-decoration: none; display: block; transition: color 0.2s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text2)'">boris@designloop.se</a>
+      </div>
+    </div>
+  </div>
 </footer>
 
 <script>
@@ -2128,6 +2208,39 @@
   }, { rootMargin: '-30% 0px -60% 0px' });
 
   sections.forEach(s => sectionObserver.observe(s));
+
+  // HAMBURGER MENU
+  const hamburger = document.getElementById('hamburger');
+  const mobileNav = document.getElementById('mobile-nav');
+
+  function closeMenu() {
+    mobileNav.classList.remove('open');
+    hamburger.classList.remove('open');
+  }
+
+  hamburger.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isOpen = mobileNav.classList.contains('open');
+    isOpen ? closeMenu() : (mobileNav.classList.add('open'), hamburger.classList.add('open'));
+  });
+
+  // Close when a nav link is clicked
+  document.querySelectorAll('.mobile-nav-link').forEach(link => {
+    link.addEventListener('click', closeMenu);
+  });
+
+  // Close on outside click or tap
+  document.addEventListener('click', (e) => {
+    if (!mobileNav.contains(e.target) && !hamburger.contains(e.target)) closeMenu();
+  });
+
+  // Close on scroll
+  window.addEventListener('scroll', closeMenu, { passive: true });
+
+  // Hide menu and reset if resized above mobile breakpoint
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 700) closeMenu();
+  });
 </script>
 </body>
 </html>
